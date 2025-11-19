@@ -1,13 +1,18 @@
 import React from "react";
 
-import DataTable from "./components/DataTable"
+import DataTable from "./components/DataTable/DataTable";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import Auth from "./components/auth/Auth";
 
 const App = () => {
   return (
-    <div>
-      <DataTable />
-    </div>
-  )
-}
+    <BrowserRouter>
+      <Routes>
+        <Route path="/home" element={<DataTable />} />
+        <Route path="/" element={<Auth />} />
+      </Routes>
+    </BrowserRouter>
+  );
+};
 
-export default App
+export default App;
