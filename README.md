@@ -1,139 +1,212 @@
-# 📝 Student Management System
+# 📝 React Student Management System with Authentication
 
-A modern React application to manage student records using **MUI DataGrid**. Users can add, edit, delete, and select students. The project demonstrates React hooks, dynamic table updates, localStorage persistence, and responsive UI design with Tailwind CSS.
+A modern React application to **manage student records** with a secure **login page**. Users can log in, add, edit, delete, and select students. The project demonstrates **React hooks**, **component composition**, **form handling**, **dynamic table updates**, **localStorage persistence**, and **responsive UI design** with Tailwind CSS and Material-UI.
 
 ---
 
 ## 🚀 Features
 
-- Add new students with roll, name, semester, and department.
-- Edit student details directly in the table cells.
-- Delete single or multiple selected students.
-- Select all/individual students using checkboxes.
-- Persistent data stored in browser `localStorage`.
-- Responsive UI with Tailwind CSS.
-- Uses Material-UI `DataGrid` for enhanced table features.
+### **Authentication**
+
+* Responsive login page with username and password fields.
+* Inline validation with error messages for invalid credentials.
+* Focus handling for empty fields.
+* Navigate to the main student management table on successful login.
+* Reusable components: `InputField`, `ErrorMessage`, `SignInButton`.
+
+### **Student Management Table**
+
+* Add new students with roll number, name, semester, and department.
+* Edit student details directly in table cells.
+* Delete single or multiple selected students.
+* Checkbox selection for all or individual students.
+* Persistent data using browser `localStorage`.
+* Reusable components: `InputRow`, `ActionButtons`, `StudentGrid`.
+* Styled with Tailwind CSS and Material-UI `DataGrid`.
 
 ---
 
 ## 🎨 Technologies Used
 
-- **React.js**  
-- **JavaScript (ES6)**  
-- **Tailwind CSS**  
-- **Material-UI (MUI)**  
-- **localStorage API**  
+* **React.js**
+* **JavaScript (ES6)**
+* **Tailwind CSS**
+* **Material-UI (MUI)**
+* **React Router**
+* **React Icons**
+* **localStorage API**
 
 ---
 
 ## 📸 Screenshots
 
+### 1. Login Page
 
-### 1. Main Table View
-<img src="https://github.com/user-attachments/assets/ba868f03-c087-4da2-9635-7294856a5ef6"   alt="ChatGPT Dropdown" width="600" />
+<img src="https://via.placeholder.com/600x400.png?text=Login+Page" alt="Login Page" width="600" />
+
+*Responsive login form with username, password, and sign-in button.*
+
+### 2. Student Management Table
+
+<img src="https://via.placeholder.com/600x400.png?text=Student+Table" alt="Student Table" width="600" />
 
 *Editable rows with checkboxes for selection.*
 
-### 2.  Add / Delete Students
-<img src="https://github.com/user-attachments/assets/8b4fb7b1-1a3e-4e1b-a680-a0fbe2b885f3"   alt="Login/Signup Modal" width="600" />
+### 3. Add/Delete Students
 
-*Add students using input fields and buttons, delete single or multiple rows.*
+<img src="https://via.placeholder.com/600x400.png?text=Add+%26+Delete+Students" alt="Add/Delete Students" width="600" />
 
+*Add students using input fields, delete single or multiple rows.*
 
 ---
 
 ## 🛠 Installation & Run
 
-- ### Clone the repository
+### Clone the repository
 
-  git clone https://github.com/SaraSalah1/react-student-datagrid.git
+```bash
+git clone https://github.com/SaraSalah1/react-student-datagrid.git
+```
 
+### Navigate to the project folder
 
-- ### Navigate to the project folder
-      cd react-student-datagrid
+```bash
+cd react-student-datagrid
+```
 
-- ### Install dependencies
-      npm install
+### Install dependencies
 
-- ### Start the development server
-      npm start
+```bash
+npm install
+```
 
-- ### Open in your browser
-      http://localhost:3000
+### Start the development server
 
-    ---
+```bash
+npm start
+```
+
+### Open in your browser
+
+```
+http://localhost:3000
+```
+
+---
 
 ## 💻 Usage
 
-- Fill in the Full Name, Semester, and Department fields and click Add Student to add a new student.
+### **Login**
 
-- Use checkboxes to select one or multiple students, then click Delete Selected.
+1. Enter the username: `sara`.
+2. Enter the password: `1234`.
+3. Click **Sign In** to navigate to the student management page.
+4. Inline error messages appear for invalid credentials.
 
-- Edit student details directly in the table cells.
+### **Manage Students**
 
-- Table updates are saved automatically in localStorage.
-  
+1. Fill in **Full Name**, **Semester**, and **Department**, then click **Add Student**.
+2. Select one or multiple students using checkboxes, then click **Delete Selected**.
+3. Edit student details directly in the table.
+4. All updates are automatically saved in `localStorage`.
 
-##🧩 Code Snippets
+---
 
-Adding a New Student
+## 🧩 Code Snippets
 
+### Authentication: Input Handling
+
+```javascript
+const handleChange = (e) => {
+  setInputs({ ...inputs, [e.target.name]: e.target.value });
+  setError("");
+};
 ```
 
-const addRow = () => {
-  if (!inputs.name) return nameRef.current.focus();
-  if (!inputs.semester) return semesterRef.current.focus();
-  if (!inputs.department) return departmentRef.current.focus();
+### Authentication: Sign In
+
+```javascript
+const handleSignIn = () => {
+  if (!inputs.user) return userRef.current.focus();
+  if (!inputs.password) return passwordRef.current.focus();
+
+  let msg = "";
+  if (inputs.user !== savedUsername) msg += "Invalid username. ";
+  if (inputs.password !== savedPassword) msg += "Invalid password.";
+
+  if (msg) {
+    setError(msg);
+    return;
+  }
+
+  navigate("/home");
+};
+```
+
+### Add New Student
+
+```javascript
+const saveNewRow = () => {
+  if (!newRow.name) return nameRef.current.focus();
+  if (!newRow.semester) return semesterRef.current.focus();
+  if (!newRow.department) return departmentRef.current.focus();
 
   let newRoll;
   do {
     newRoll = Math.floor(Math.random() * 10000);
   } while (rows.some((r) => r.roll === newRoll));
 
-  setRows([...rows, { roll: newRoll, ...inputs }]);
-  setInputs({ name: "", semester: "", department: "" });
-  nameRef.current.focus();
+  setRows([{ roll: newRoll, ...newRow }, ...rows]);
+  setNewRow({ name: "", semester: "", department: "" });
+  setIsAddingRow(false);
 };
-
 ```
 
-Deleting Selected Students
+### Delete Selected Students
 
-```
+```javascript
 const deleteSelected = () => {
   setRows(rows.filter((r) => !selectionModel.includes(r.roll)));
   setSelectionModel([]);
 };
+```
 
+---
+
+## 📂 Project Structure
+
+```
+src/
+├─ components/
+│  ├─ auth/
+│  │  ├─ Auth.jsx
+│  │  ├─ InputField.jsx
+│  │  ├─ ErrorMessage.jsx
+│  │  └─ SignInButton.jsx
+│  ├─ DataTable/
+│  │  ├─ DataTable.jsx
+│  │  ├─ InputRow.jsx
+│  │  ├─ ActionButtons.jsx
+│  │  └─ StudentGrid.jsx
+├─ App.jsx
+└─ index.js
 ```
 
 ---
 
 ## 🤝 Contributing
 
-Contributions are welcome! Follow these steps:
+Contributions are welcome!
 
-- #### Fork the repository
+* Fork the repository
+* Create a feature branch: `git checkout -b feature/YourFeature`
+* Commit changes: `git commit -m "Add some feature"`
+* Push to the branch: `git push origin feature/YourFeature`
+* Open a Pull Request
 
-- #### Create a feature branch
+---
 
-      git checkout -b feature/YourFeature
-
-
-- #### Commit your changes
-
-      git commit -m "Add some feature"
-
-
-- #### Push to the branch
-
-      git push origin feature/YourFeature
-  
-- #### Open a Pull Request
-
-- ---
-
-👩‍💻 **Created by [Sara Salah](https://github.com/SaraSalah1)**  
+👩‍💻 **Created by [Sara Salah](https://github.com/SaraSalah1)**
 📦 [View the project on GitHub](https://github.com/SaraSalah1/react-student-datagrid)
 
 ---
