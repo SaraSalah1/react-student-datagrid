@@ -42,19 +42,19 @@ A modern React application to **manage student records** with a secure **login p
 
 ### 1. Login Page
 
-<img src="https://via.placeholder.com/600x400.png?text=Login+Page" alt="Login Page" width="600" />
+<img src="https://github.com/user-attachments/assets/4b1547c2-5d82-4ec9-9860-f7897abc482c" alt="Login Page" width="600" />
 
 *Responsive login form with username, password, and sign-in button.*
 
 ### 2. Student Management Table
 
-<img src="https://via.placeholder.com/600x400.png?text=Student+Table" alt="Student Table" width="600" />
+<img src="https://github.com/user-attachments/assets/564eaf09-e01a-4c10-9b68-5814aad1a389" alt="Student Table" width="600" />
 
 *Editable rows with checkboxes for selection.*
 
 ### 3. Add/Delete Students
 
-<img src="https://via.placeholder.com/600x400.png?text=Add+%26+Delete+Students" alt="Add/Delete Students" width="600" />
+<img src="https://github.com/user-attachments/assets/93eb26c5-c1ef-45d5-84c2-c764d46098d5" alt="Add/Delete Students" width="600" />
 
 *Add students using input fields, delete single or multiple rows.*
 
