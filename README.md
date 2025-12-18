@@ -1,4 +1,9 @@
 # 📝 React Student Management System with Authentication
+[![Live Demo](https://img.shields.io/badge/Demo-Live_on_Vercel-blue?style=for-the-badge&logo=vercel)](https://react-student-datagrid-iigw7bj55-saras-projects-4546e131.vercel.app)
+[![React](https://img.shields.io/badge/React-18.x-61DAFB?style=for-the-badge&logo=react)](https://reactjs.org/)
+[![Tailwind](https://img.shields.io/badge/Tailwind-CSS-38B2AC?style=for-the-badge&logo=tailwind-css)](https://tailwindcss.com/)
+[![MUI](https://img.shields.io/badge/Material--UI-v5-0081CB?style=for-the-badge&logo=mui)](https://mui.com/)
+
 
 A modern React application for **managing student records securely**.  
 Includes a **login page**, and allows users to **add, edit, delete, and select students**.  
